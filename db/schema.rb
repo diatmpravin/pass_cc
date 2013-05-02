@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502191502) do
+ActiveRecord::Schema.define(:version => 20130502192922) do
+
+  create_table "rest_clients", :force => true do |t|
+    t.string   "email"
+    t.string   "name"
+    t.text     "description"
+    t.string   "api_key"
+    t.string   "secret"
+    t.boolean  "is_master"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "tasks", :force => true do |t|
     t.string   "name"
