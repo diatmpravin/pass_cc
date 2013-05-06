@@ -1,7 +1,10 @@
 PassCc::Application.routes.draw do
-  get "user/login"
-
+  
   resources :tasks, except: [:new, :edit]
+
+  resources :apps, except: [:new, :edit]
+
+  resources :users, except: [:new, :edit]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
