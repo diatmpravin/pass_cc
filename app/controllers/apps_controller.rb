@@ -12,7 +12,7 @@ class AppsController < ApplicationController
   def create
     puts params.inspect
     puts 'create--------------------------------------------------------------!!'
-    sleep 5
+    sleep 1
     if params[:source_zip]
       puts require 'fileutils' 
       puts params[:source_zip].inspect
@@ -26,9 +26,61 @@ class AppsController < ApplicationController
       puts FileUtils.cp tmp.path, file
       p 'AAAAAAAAAAAAAa'
       puts FileUtils.rm tmp.path
-      render json: {"cdn_url" => 'www.shephertz.nixcraft.in'}
+
+      response = JSONBuilder::Compiler.generate do
+        app42 do
+          response do
+            success true
+            code 200
+            message 'Done'
+            app do |name|
+              domain 'http://demo.app42.com'  
+            end   
+          end
+        end
+      end
+
+      # response = JSONBuilder::Compiler.generate do
+      #   app42 do
+      #     response do
+      #       success false
+      #       code 401
+      #       message 'Out of memory'   
+      #     end
+      #   end
+      # end
+
+
+
+      render json: response
     else
-      render json: {"domain" => 'http://demo.app42.com'}
+      response = JSONBuilder::Compiler.generate do
+        app42 do
+          response do
+            success true
+            code 200
+            message 'Available'
+            app do |name|
+              domain 'http://demo.app42.com'  
+            end   
+          end
+        end
+      end
+
+      # response = JSONBuilder::Compiler.generate do
+      #   app42 do
+      #     response do
+      #       success true
+      #       code 401
+      #       message 'Not available'
+      #       app do |name|
+      #         domain 'http://demo.app42.com'  
+      #       end   
+      #     end
+      #   end
+      # end
+
+      render json: response
     end 
     
     

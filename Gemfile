@@ -9,6 +9,7 @@ gem 'rails-api'
 
 gem 'mysql2'
 gem 'restful_api_authentication'
+gem "json_builder", "~> 3.1.7"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

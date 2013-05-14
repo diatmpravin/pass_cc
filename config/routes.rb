@@ -1,5 +1,7 @@
 PassCc::Application.routes.draw do
   
+  resources :config, except: [:new, :edit]
+
   resources :tasks, except: [:new, :edit]
 
   resources :apps, except: [:new, :edit]
