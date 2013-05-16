@@ -5,7 +5,7 @@ class ConfigController < ApplicationController
 
   def show
     p "In show-----------------------------------------------------!!!"
-    puts "Request ====>>  #{params.inspect}"
+    puts "Get Request===========> #{params.inspect}"
     
     if params['id'] == 'infra'
       response = JSONBuilder::Compiler.generate do
@@ -41,7 +41,7 @@ class ConfigController < ApplicationController
         app42 do
           response do
             success true
-            source_type ["Binary", "Git"] do |name|
+            frameworks ["grails", "spring", "php", "node"] do |name|
               name name  
             end   
           end

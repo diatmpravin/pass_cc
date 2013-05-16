@@ -1,9 +1,22 @@
 PassCc::Application.routes.draw do
   
+  
   resources :config, except: [:new, :edit]
 
   resources :tasks, except: [:new, :edit]
 
+  post "apps/scale"
+  post "apps/descale"
+  get "apps/start"
+  get "apps/stop"
+  get "apps/restart"
+  get "apps/restart"
+  get "apps/restart"
+  get "apps/restart"
+  get "apps/delete"
+  get "apps/info"
+  get "apps/status"
+  get "apps/releases"
   resources :apps, except: [:new, :edit]
 
   resources :users, except: [:new, :edit]

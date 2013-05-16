@@ -6,7 +6,8 @@ class UsersController < ApplicationController
 
   def show
     p "In show-----------------------------------------------------!!!"
-    puts "Request ====>>  #{params.inspect}"
+    puts "Get Request===========> #{params.inspect}"
+    
     
     response = JSONBuilder::Compiler.generate do
       app42 do
@@ -19,10 +20,12 @@ class UsersController < ApplicationController
       end
     end	
     
+    # puts "Headers========> #{request.headers['api_key']}"
     # response = JSONBuilder::Compiler.generate do
     #   app42 do
     #     response do
-    #       success false 
+    #       success false
+    #       message 'You have not sufficient memory for app deploy' 
     #     end
     #   end
     # end 
@@ -35,6 +38,9 @@ class UsersController < ApplicationController
 
   def create
     p "In create-----------------------------------------------------!!!"
+   
+    puts "Params ===> #{params.inspect}" 
+
     sleep 2
 
     response = JSONBuilder::Compiler.generate do
@@ -42,13 +48,14 @@ class UsersController < ApplicationController
         response do
           success true
           code 200
+          message 'Authentication successful.'
           user do
             email 'test@gmail.com'
             first_name 'Shephertz'
             last_name 'test'
             phone 9856956895
             api_key 'df1dcdb0-958c-0130-9368-3c970e529c4b'
-            secrete_key 'be9faaf56ff75bacae2ac9712b02c8feb8ffc6bb3381b60e1e9efccccd81086d'    
+            secret_key 'be9faaf56ff75bacae2ac9712b02c8feb8ffc6bb3381b60e1e9efccccd81086d'    
          end  
         end
       end
@@ -57,11 +64,9 @@ class UsersController < ApplicationController
     # response = JSONBuilder::Compiler.generate do
     #   app42 do
     #     response do
-    #       success true
+    #       success false
     #       code 401
-    #       user do
-    #         email 'test@gmail.com'
-    #      end  
+    #       message 'Authorization failed.'  
     #     end
     #   end
     # end
@@ -69,17 +74,16 @@ class UsersController < ApplicationController
     # response = JSONBuilder::Compiler.generate do
     #   app42 do
     #     response do
-    #       success true
+    #       success false
     #       code 402
-    #       user do
-    #         email 'test@gmail.com'
-    #      end  
+    #       message 'You are not authorize.'  
     #     end
     #   end
     # end
 
+
     # tokens = RestClient.where(:email => params['email']).first
-    puts response
+    puts "Response---> #{response}"
     render json: response
   end
 
